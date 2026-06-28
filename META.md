@@ -67,19 +67,19 @@ Metadata for the Evergreen website.
 - `./NoteContainer`
 - `./NoteColumnsContainer.scss`
 - `NOTE_WIDTH`
-  - Default: 584
+  - Default: 585
 
 ## Note Columns Scrolling Container
 
-- `./NoteColimnsContainer`
-- `./NoteCoumnsScrollingContainer.scss`
+- `./NoteColumnsContainer`
+- `./NoteColumnsScrollingContainer.scss`
 
 ## Note Container
 
 - `../utils`
 - `./Footer`
 - `./Notelink`
-- `./NotewContainer.scss`
+- `./NoteContainer.scss`
 
 ## Note Link
 

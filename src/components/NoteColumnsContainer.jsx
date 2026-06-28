@@ -32,11 +32,14 @@ const NoteColumnsContainer = ({scrollRef}) => {
   )
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setScroll(scrollRef?.current?.scrollLeft)
-    }, 200)
-    return () => clearInterval(intervalId)
-  }, [scrollRef])
+      const container = scrollRef?.current
+      if (!container) return
+      const handleScroll = () => {
+        setScroll(container.scrollLeft)
+      }
+      container.addEventListener("scroll", handleScroll)
+      return () => container.removeEventListener("scroll", handleScroll)
+    }, [scrollRef])
 
   const handleScrollToNote = useCallback(
     (notePath) => {
@@ -94,14 +97,10 @@ const centerOffset = !smallScreen
   ? Math.max(0, (window.innerWidth - totalPanesWidth) / 2)
   : 0
 
-// cap visible obscured labels at 3 closest to active pane
-const collapsedCount = shownNotes.filter((_, i) => scroll > NOTE_WIDTH * (i + 1) - 80).length
-const hiddenLabelCount = Math.max(0, collapsedCount - 3)
-
   return (
     <div className="NoteColumnsContainer" style={{ transform: `translateX(${centerOffset}px)` }}>
       {shownNotes.map((note, index) => {
-        const noteIsTooFarOnTheLeft = scroll > NOTE_WIDTH * (index + 1) - 80
+        const noteIsTooFarOnTheLeft = scroll > NOTE_WIDTH * (index + 1) - 32 //originally 80
         const lastNote = index === noteIds.length - 1
         const noteIsTooFarOnTheRight =
           lastNote &&
@@ -116,14 +115,13 @@ const hiddenLabelCount = Math.max(0, collapsedCount - 3)
               scroll > Math.max(NOTE_WIDTH * (index - 1), 0) ||
               (lastNote && scroll < NOTE_WIDTH * (noteIds.length - 2) - 400)
             }
-            style={{left: `${index * 40}px`, right: `-${NOTE_WIDTH}px`}}
+            style={{left: `${Math.min(index, 3) * 40}px`, right: `-${NOTE_WIDTH}px`}}
+            stackHidden={noteIsTooFarOnTheLeft && index >= 3}
             note={note}
             noteIdsStack={noteIds}
             scrollToNote={handleScrollToNote}
             showPopoverForNote={() => {}} // dummy popover
-            // showPopoverForNote={setPopoverData} // active branch
-            //TODO: bug with popover, alternates between .404 and note to display
-            //TODO: bug with popover, causes MANY re-renders (on NoteContainer, but not on Footer links)
+            // showPopoverForNote={setPopoverData} // uncomment to reactivate popover
             key={note.path ?? ".404"}
           />
         )

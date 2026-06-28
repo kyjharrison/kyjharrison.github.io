@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     ViteRestart({
       // changes in these paths will restart the server automatically
-      restart: ["notes/**", "src/**", "public/**", "index.html", "config.json"],
+      restart: ["notes/**", "public/**", "index.html", "config.json"],
     }),
     react(),
   ],

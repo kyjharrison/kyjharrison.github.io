@@ -12,6 +12,7 @@ const NoteContainer = ({
   style,
   verticalMode,
   overlay,
+  stackHidden,
   note,
   noteIdsStack,
   scrollToNote,
@@ -32,15 +33,15 @@ const NoteContainer = ({
   }, [])
 
   return (
-    <main className={`NoteContainer ${overlay ? "Overlay" : ""}`} style={style}>
+    <main className={`NoteContainer ${overlay && !stackHidden ? "Overlay" : ""}`} style={style}>
       <div
         className="PresentedNote"
-        style={{opacity: verticalMode ? 0 : undefined}}
+        style={{opacity: verticalMode && !stackHidden ? 0 : undefined}}
       >
         <div className="NoteContainer">
           <div className="PrimaryNote">
             <div
-              style={{
+              style={{  
                 height: "100%",
                 overflow: "hidden",
               }}
@@ -73,8 +74,8 @@ const NoteContainer = ({
           /> */}
         </div>
       </div>
-      {verticalMode ? (
-        <div className="ObscuredLabel">{note?.title}</div>
+      {verticalMode && !stackHidden ? (
+        <div className="ObscuredLabel"></div>
       ) : (
         <></>
       )}
