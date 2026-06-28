@@ -109,10 +109,6 @@ const hiddenLabelCount = Math.max(0, collapsedCount - 3)
             150 &&
           scroll < NOTE_WIDTH * (noteIds.length - 2) - 65
 
-      const collapsedBefore = shownNotes.filter((_, i) => i < index && scroll > NOTE_WIDTH * (i + 1) - 80).length
-      const isHiddenLabel = noteIsTooFarOnTheLeft && collapsedBefore < hiddenLabelCount
-      const labelPosition = noteIsTooFarOnTheLeft ? Math.max(0, collapsedBefore - hiddenLabelCount) : index
-
         return (
           <NoteContainer
             verticalMode={noteIsTooFarOnTheLeft || noteIsTooFarOnTheRight}
@@ -120,14 +116,7 @@ const hiddenLabelCount = Math.max(0, collapsedCount - 3)
               scroll > Math.max(NOTE_WIDTH * (index - 1), 0) ||
               (lastNote && scroll < NOTE_WIDTH * (noteIds.length - 2) - 400)
             }
-            style={{
-              left: `${isHiddenLabel ? 0 : noteIsTooFarOnTheLeft ? labelPosition * 40 : index * 40}px`,
-              right: `-${NOTE_WIDTH}px`,
-              opacity: isHiddenLabel ? 0 : 1,
-              pointerEvents: isHiddenLabel ? 'none' : undefined,
-              width: isHiddenLabel ? 0 : undefined,
-              minWidth: isHiddenLabel ? 0 : undefined,
-            }}
+            style={{left: `${index * 40}px`, right: `-${NOTE_WIDTH}px`}}
             note={note}
             noteIdsStack={noteIds}
             scrollToNote={handleScrollToNote}
