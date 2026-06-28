@@ -1,7 +1,7 @@
 .Popover {
   --arrowBaseWidth: 32px;
   --arrowLength: 16px;
-  --backgroundColor: white;
+  --backgroundColor: var(--pane);
   pointer-events: none;
   background-color: var(--backgroundColor);
   border-radius: 8px;

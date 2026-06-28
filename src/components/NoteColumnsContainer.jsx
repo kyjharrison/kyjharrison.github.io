@@ -88,8 +88,18 @@ const NoteColumnsContainer = ({scrollRef}) => {
     }
   }, []) // Add empty dependency array
 
+  // centers when the panes do not take up the full screen
+const totalPanesWidth = noteIds.length * 625
+const centerOffset = !smallScreen
+  ? Math.max(0, (window.innerWidth - totalPanesWidth) / 2)
+  : 0
+
+// cap visible obscured labels at 3 closest to active pane
+const collapsedCount = shownNotes.filter((_, i) => scroll > NOTE_WIDTH * (i + 1) - 80).length
+const hiddenLabelCount = Math.max(0, collapsedCount - 3)
+
   return (
-    <div className="NoteColumnsContainer">
+    <div className="NoteColumnsContainer" style={{ transform: `translateX(${centerOffset}px)` }}>
       {shownNotes.map((note, index) => {
         const noteIsTooFarOnTheLeft = scroll > NOTE_WIDTH * (index + 1) - 80
         const lastNote = index === noteIds.length - 1
@@ -98,6 +108,11 @@ const NoteColumnsContainer = ({scrollRef}) => {
           window.innerWidth + scroll - NOTE_WIDTH * (noteIds.length - 1) <
             150 &&
           scroll < NOTE_WIDTH * (noteIds.length - 2) - 65
+
+      const collapsedBefore = shownNotes.filter((_, i) => i < index && scroll > NOTE_WIDTH * (i + 1) - 80).length
+      const isHiddenLabel = noteIsTooFarOnTheLeft && collapsedBefore < hiddenLabelCount
+      const labelPosition = noteIsTooFarOnTheLeft ? Math.max(0, collapsedBefore - hiddenLabelCount) : index
+
         return (
           <NoteContainer
             verticalMode={noteIsTooFarOnTheLeft || noteIsTooFarOnTheRight}
@@ -105,12 +120,19 @@ const NoteColumnsContainer = ({scrollRef}) => {
               scroll > Math.max(NOTE_WIDTH * (index - 1), 0) ||
               (lastNote && scroll < NOTE_WIDTH * (noteIds.length - 2) - 400)
             }
-            style={{left: `${index * 40}px`, right: `-${NOTE_WIDTH}px`}}
+            style={{
+              left: `${isHiddenLabel ? 0 : noteIsTooFarOnTheLeft ? labelPosition * 40 : index * 40}px`,
+              right: `-${NOTE_WIDTH}px`,
+              opacity: isHiddenLabel ? 0 : 1,
+              pointerEvents: isHiddenLabel ? 'none' : undefined,
+              width: isHiddenLabel ? 0 : undefined,
+              minWidth: isHiddenLabel ? 0 : undefined,
+            }}
             note={note}
             noteIdsStack={noteIds}
             scrollToNote={handleScrollToNote}
-            // showPopoverForNote={() => {}}
-            showPopoverForNote={setPopoverData}
+            showPopoverForNote={() => {}} // dummy popover
+            // showPopoverForNote={setPopoverData} // active branch
             //TODO: bug with popover, alternates between .404 and note to display
             //TODO: bug with popover, causes MANY re-renders (on NoteContainer, but not on Footer links)
             key={note.path ?? ".404"}

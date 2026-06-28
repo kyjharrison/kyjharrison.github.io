@@ -2,8 +2,8 @@
   width: 100%;
   min-height: 44px;
   z-index: 5;
-  background-color: white;
-  border-bottom: 1px solid #dadada;
+  background-color: var(--pane);
+  border-bottom: 1px solid var(--header-border);
   display: flex;
   align-items: center;
   padding-top: 10px;
@@ -27,18 +27,14 @@
 
 #header h1 {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-weight: 500;
   font-size: 17px;
-  margin-right: 16px;
+  margin-right: 32px;
 }
 
 #header .noteLink {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 15px;
-  color: #333;
+  color: var(--text);
   text-decoration: none;
   margin-left: 16px;
 }
@@ -57,31 +53,3 @@
   }
 }
 
-#header .userState {
-  margin-left: auto;
-}
-
-#header .userState .anonymousNotice {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 15px;
-  color: #0a84ff;
-}
-
-#header .userState .anonymousNotice a {
-  color: inherit;
-}
-
-#header .userState .identity {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 15px;
-  font-weight: 300;
-  color: #999;
-}
-
-@media only screen and (max-width: 799px) {
-  #header .userState .identity {
-    display: none;
-  }
-}

@@ -1,42 +1,22 @@
 > This is the homepage.
 
-## Invita sunt imitantes novoque quidem septem
+## Header
 
-Lorem markdownum utque, altus nurus minor lingua: ille, vix _tibi_. Adesse si _armos_ dilexit, in rore nimium, loca? Pontus paries: per sum distantes munera dedere mactare et malas volucres, is Iovique quo sonum auresque Phaethon [vertit](http://www.in.net/famae-superas). Fama ora funesta positoris ipso, maternae nec est progenuit misit.
+This is the body of the page. I can write whatever I want here
 
-    epsPoint.viewBpsAdapter(twitter_bmp * double - timeMatrix);
-    if (point.onlySubdirectoryUnc(781542, biosResolution.backbone_tag_gigaflops(
-            degauss, sslWordFlowchart))) {
-        bar = parityRgbBridge.titleVci(raid, 3);
-        controlPageOcr = format;
-        configurationWeb += nat_video + systray_username_address;
-    } else {
-        repeaterProm = icmp + index(double, alpha);
-        push(17, timeSoftwareDot(rpc), bin);
-    }
-    adf(cdfs_twain, 3, and_www_hashtag - interpreterMultiplatformVolume +
-            networking);
-    file.vdu_tween = 5;
+### Smaller Header
+this is another paragraph
 
-## Optas vulnus album reliquerat quid Erymanthidas quam
+#### Even Smaller Header
 
-Vos pavor tempora. Ecce lenis ducere _candescere luxit_ ardua, rerum me sine est! Tuam viva coniugiale quod; mare te coegerat, voco hedera flumineis patriam vulnere!
+one more
 
-1. Humus iuventa stupuit iussae temerarius fabula
-2. Culta ne fuit suis Latonia variis frons
-3. Spectat cur
+a quote from my notes:
 
-## Fuit arboreae auras
+> Sparky should able to inspect its own source code and answer basic questions about it. Like, "are you currently set up for timestamp habits?" when i want to use the add_habit tool but can't remember whether that branch is currently commented out
 
-Viri domo dicitur parentes uritur est denique coronas remoliri. Manu laeva _iam portis ignota_ nostra Booten non tecum, nati teque fovebat sanguine, nec ulnis, sustinuit. Si resque ipsa durior quoque amore esse et habebunt visaque.
+***
 
-1. Terres e de cavernas meminisse proceres vitae
-2. Orbe deum animus tum enutrivere rupit harenis
-3. Mansit tantum ferarumque si foret Pallade adsunt
-4. Et corpus inquit primaque
-5. Subiere cunctis relinque nuda certat vires gelidus
-
-Sepulcro ademptum, tuae. **Paternam** constantia Aonides ipsos alios, cum [telo testantur excipiunt](http://www.urbes.net/) ego.
 
 ## Links
 

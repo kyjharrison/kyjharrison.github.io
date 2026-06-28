@@ -2,6 +2,8 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom"
 
+import "@fontsource/nunito"
+
 import App from "./pages/Evergreen.jsx"
 
 import Config from "../config.json"

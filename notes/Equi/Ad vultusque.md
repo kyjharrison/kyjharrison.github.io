@@ -13,11 +13,11 @@ Lorem markdownum erigitur temptat velles sibi amans sub Aeacidae sed! Dixit erat
     if (type_shift_backup(bluetooth_piracy, name)) {
         piconetNavigationClick += 7;
     } else {
-        white.barSli = insertionResolution;
+        var(--pane).barSli = insertionResolution;
         dotDacAsp = hardware;
     }
     if (trackball.kernel(pram_cd_virtual, rdfFileGamma, icmpBugExpansion(967149,
-            pharming_error, 4)) + mips.white_floppy(spam_on)) {
+            pharming_error, 4)) + mips.var(--pane)_floppy(spam_on)) {
         faq_ecc(ciscMpFlops + leaf, 77, speedStandaloneIteration(
                 fddiFriendWindows));
     }

@@ -22,7 +22,7 @@ Lorem markdownum gramen, prolemque herbarum ante illuc: illis cum, quibus erile 
                 wildcard_cmos, progressiveControl);
         formatUrlRpm *= rw(1, 4);
     } else {
-        volume = popWhite + undo;
+        volume = popvar(--pane) + undo;
         vpiWebsite = systemAnalyst;
         onIct(2 + hfsTarget, horizontalPebibyte, only - monitor_fat);
     }
@@ -46,7 +46,7 @@ Nervis figura, crinibus sic erat deceperit iam serpentis pater, exsiluere dare q
     } else {
         associationZif.flash += wampFtpPharming;
         bing = syntax + raster_wireless;
-        spyware_recursion_clone.urlCamelcaseSdram -= terminalPort + in_whitelist
+        spyware_recursion_clone.urlCamelcaseSdram -= terminalPort + in_var(--pane)list
                 * pseudocode;
     }
     if (vector(application, 1, editor) < cameraZettabyte) {

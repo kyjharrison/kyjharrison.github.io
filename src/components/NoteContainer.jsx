@@ -65,12 +65,12 @@ const NoteContainer = ({
               </div>
             </div>
           </div>
-          <Footer
+          {/* <Footer
             note={note}
             showPopoverForNote={showPopoverForNote}
             noteIdsStack={noteIdsStack}
             scrollToNote={scrollToNote}
-          />
+          /> */}
         </div>
       </div>
       {verticalMode ? (

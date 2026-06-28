@@ -1,15 +1,46 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Nunito', system-ui, sans-serif;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --pane: #FAF8F3;
+//  --bg: #F7F4EE;
+  --bg: #F5F1E8;
+ 
+  --text: #2C2A24;
+
+  --link: #4A6B35;
+  --link-visited: #3B5C2A;
+//  --link-hover: 
+  
+  --h3: #9E5A32;
+  
+  --horizontal-rule: #D8D0BC;
+  --header-border: #D4A017;
+
+  --border: #D8D0BC;
+  
+//  #F5F1E8;
+  
+  
+
+
+
+  --green-3: #2E4A20;
+  --green-2: #3B5C2A;
+  --green-1: #4A6B35;
+  --terracotta: #9E5A32;
+  --daisy-gold: #D4A017;
+  --tan-1:   #C8BFA8;
+  --tan-2: #D8D0BC;
 }
 
 body {
-  background-color: #fafafc;
+  background-color: var(--bg);
   margin: 0;
   padding: 0;
   height: 100vh;

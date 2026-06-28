@@ -54,7 +54,7 @@ const NoteLink = ({
       } else {
         const from = noteIdsStack.indexOf(openNoteId)
         setSearchParams({
-          stacked: [...noteIdsStack.slice(1, from + 1), targetNoteId],
+          stacked: [...noteIdsStack.slice(1), targetNoteId], // revert to (1, from + 1) to go back to pruned behavior
         })
       }
     },
