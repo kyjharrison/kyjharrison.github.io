@@ -10,9 +10,6 @@ import "./NoteContainer.scss"
 
 const NoteContainer = ({
   style,
-  verticalMode,
-  overlay,
-  stackHidden,
   note,
   noteIdsStack,
   scrollToNote,
@@ -33,10 +30,9 @@ const NoteContainer = ({
   }, [])
 
   return (
-    <main className={`NoteContainer ${overlay && !stackHidden ? "Overlay" : ""}`} style={style}>
+    <main className="NoteContainer" style={style}>
       <div
         className="PresentedNote"
-        style={{opacity: verticalMode && !stackHidden ? 0 : undefined}}
       >
         <div className="NoteContainer">
           <div className="PrimaryNote">
@@ -74,11 +70,6 @@ const NoteContainer = ({
           /> */}
         </div>
       </div>
-      {verticalMode && !stackHidden ? (
-        <div className="ObscuredLabel"></div>
-      ) : (
-        <></>
-      )}
     </main>
   )
 }

@@ -20,7 +20,6 @@ const NoteColumnsContainer = ({scrollRef}) => {
   const [shownNotes, setShownNotes] = useState([])
   const [smallScreen, setSmallScreen] = useState(false)
   const [popoverData, setPopoverData] = useState()
-  const [scroll, setScroll] = useState(0)
 
   const scrollToAmount = useCallback(
     (amount) => {
@@ -31,20 +30,12 @@ const NoteColumnsContainer = ({scrollRef}) => {
     [scrollRef],
   )
 
-  useEffect(() => {
-      const container = scrollRef?.current
-      if (!container) return
-      const handleScroll = () => {
-        setScroll(container.scrollLeft)
-      }
-      container.addEventListener("scroll", handleScroll)
-      return () => container.removeEventListener("scroll", handleScroll)
-    }, [scrollRef])
-
   const handleScrollToNote = useCallback(
     (notePath) => {
       const index = noteIds.indexOf(notePath)
-      scrollToAmount((index === -1 ? noteIds.length : index) * NOTE_WIDTH)
+      const target = (index === -1 ? noteIds.length : index) * NOTE_WIDTH
+      const maxScroll = Math.max(0, noteIds.length * 625 - window.innerWidth)
+      scrollToAmount(Math.min(target, maxScroll))
     },
     [noteIds, scrollToAmount],
   )
@@ -100,23 +91,11 @@ const centerOffset = !smallScreen
   return (
     <div className="NoteColumnsContainer" style={{ transform: `translateX(${centerOffset}px)` }}>
       {shownNotes.map((note, index) => {
-        const noteIsTooFarOnTheLeft = scroll > NOTE_WIDTH * (index + 1) - 32 //originally 80
         const lastNote = index === noteIds.length - 1
-        const noteIsTooFarOnTheRight =
-          lastNote &&
-          window.innerWidth + scroll - NOTE_WIDTH * (noteIds.length - 1) <
-            150 &&
-          scroll < NOTE_WIDTH * (noteIds.length - 2) - 65
-
+        
         return (
           <NoteContainer
-            verticalMode={noteIsTooFarOnTheLeft || noteIsTooFarOnTheRight}
-            overlay={
-              scroll > Math.max(NOTE_WIDTH * (index - 1), 0) ||
-              (lastNote && scroll < NOTE_WIDTH * (noteIds.length - 2) - 400)
-            }
-            style={{left: `${Math.min(index, 3) * 40}px`, right: `-${NOTE_WIDTH}px`}}
-            stackHidden={noteIsTooFarOnTheLeft && index >= 3}
+            style={{left: '0px'}}
             note={note}
             noteIdsStack={noteIds}
             scrollToNote={handleScrollToNote}

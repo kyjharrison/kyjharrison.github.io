@@ -12,8 +12,19 @@
   flex-direction: row;
 }
 
+.NoteContainer:first-of-type {
+  box-shadow: -10px 0 15px -5px var(--shadow);
+}
+.NoteContainer:last-of-type {
+  box-shadow: 10px 0 15px -5px var(--shadow);
+}
+.NoteContainer:first-of-type:last-of-type {
+  box-shadow: 0 0 20px var(--shadow);
+}
+
 @media screen and (max-width: 800px) {
   .NoteColumnsContainer {
     width: unset !important;
   }
 }
+
