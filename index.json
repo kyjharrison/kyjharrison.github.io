@@ -1,0 +1,96 @@
+{
+  "home": {
+    "slug": "home",
+    "title": "home",
+    "path": "posts/home.md",
+    "series": [],
+    "published": null,
+    "last_updated": null,
+    "links": [
+      "link1",
+      "link2",
+      "link3"
+    ],
+    "backlinks": [],
+    "photos": [],
+    "photo_embedded_in": []
+  },
+  "link1": {
+    "slug": "link1",
+    "title": "link1",
+    "path": "posts/link1.md",
+    "type": "post",
+    "series": [],
+    "published": null,
+    "last_updated": null,
+    "links": [
+      "link3",
+      "link4"
+    ],
+    "backlinks": [
+      "home"
+    ],
+    "photos": [],
+    "photo_embedded_in": []
+  },
+  "link2": {
+    "slug": "link2",
+    "title": "link2",
+    "path": "posts/link2.md",
+    "series": [],
+    "published": null,
+    "last_updated": null,
+    "links": [],
+    "backlinks": [
+      "home"
+    ],
+    "photos": [],
+    "photo_embedded_in": []
+  },
+  "link3": {
+    "slug": "link3",
+    "title": "link3",
+    "path": "posts/link3.md",
+    "series": [],
+    "published": null,
+    "last_updated": null,
+    "links": [
+      "untitled one"
+    ],
+    "backlinks": [
+      "home",
+      "link1"
+    ],
+    "photos": [],
+    "photo_embedded_in": []
+  },
+  "link4": {
+    "slug": "link4",
+    "title": "link4",
+    "path": "posts/link4.md",
+    "series": [],
+    "published": null,
+    "last_updated": null,
+    "links": [],
+    "backlinks": [
+      "link1"
+    ],
+    "photos": [],
+    "photo_embedded_in": []
+  },
+  "untitled-one": {
+    "slug": "untitled-one",
+    "title": "Untitled one",
+    "path": "posts/Untitled one.md",
+    "type": "post",
+    "series": [],
+    "published": null,
+    "last_updated": null,
+    "links": [],
+    "backlinks": [
+      "link3"
+    ],
+    "photos": [],
+    "photo_embedded_in": []
+  }
+}
