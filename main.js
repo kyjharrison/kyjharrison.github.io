@@ -5,7 +5,7 @@ import { slugify } from './utils.js'
 
 const main = document.querySelector('main')
 
-const index = await fetch('./index.json').then(r => r.json())
+const metadata = await fetch('./index.json').then(r => r.json())
 
 const openPanes = new Map()
 
@@ -15,35 +15,12 @@ const PANE_WIDTH = parseInt(
 
 // takes a note slug, fetches content, creates a new pane
 async function renderPane(slug) {
-    const path = index[slug].path
-    const response = await fetch(path)
+    const response = await fetch(`/build/${slug}`)
     const raw = await response.text()
-    const { body } = splitFrontmatter(raw)
 
-    const cleaned = body
-        // turn obsidian-embedded images into html embeds linking to the image pages
-        .replace(
-            /!\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, // looks for embeds like ![[image.jpg|alt text]]
-            (match, filename, alt) => {
-                const photoSlug = slugify(filename.replace(/\.[^.]+$/, '')) // strips file extension
-                const entry = index[photoSlug]
-                if (!entry) {
-                    console.warn(`Image not found in index: ${photoSlug}`)
-                    return ''
-                }
-                return `<a href="./${photoSlug}"><img src="photos/${filename}" alt="${alt||''}"></a>`
-            })
-        // turn obsidian wikilinks into markdown links
-        .replace(
-        /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, // finds [[link|alias]]
-        (match, link, alias) => {
-            const slug = slugify(link)
-            return `[${alias || link }](./${slug})`
-        })
-
-    const pane = document.createElement('article')
-    pane.className = "pane"
-    pane.innerHTML = marked(cleaned) // feed the cleaned note body through the markdown-to-html parser and dump it into the pane  
+    const parser = new DOMParser()
+    const page = parser.parseFromString(raw, 'text/html')
+    const pane = page.querySelector('article')
     return pane
 }
 
@@ -64,6 +41,7 @@ async function appendPane(slug) {
     main.appendChild(pane)
     openPanes.set(slug, pane)
     updateURL()
+    document.title = `${metadata.title} | Ky Harrison`
     pane.scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
 }
 
@@ -75,7 +53,7 @@ async function appendPane(slug) {
 
 // TODO async function loadFromURL {}
 
-window.addEventListener('popstate', loadFromURL)
+// window.addEventListener('popstate', loadFromURL) bUT NOT RELOADING THE WHOLE THING
 
 main.addEventListener('click', (event) => {
     const link = event.target.closest('a')
