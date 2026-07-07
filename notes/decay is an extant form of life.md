@@ -4,8 +4,7 @@ series:
 date-published: 2026-07-05T17:32:00
 date-last-modified:
 ---
-
-Tumblr poetry goes so hard sometimes. Back in 2018 @personsonable wrote *you cannot kill me in a way that matters* and *decay exists as an extant form of life*. 
+Tumblr poetry goes so hard sometimes. Back in 2018 @personsonable[^1] wrote *you cannot kill me in a way that matters* and *decay exists as an extant form of life*.[^2]
 
 It was a shitpost about mushrooms, but *damn.* 
 
@@ -17,6 +16,7 @@ It's beautiful.
 
 I hope I become a [[stump|tree]]. 
 
-***
+[^1]: https://www.tumblr.com/personsonable
 
-Source: https://www.tumblr.com/world-heritage-posts/641432718469677056/miaislying-personsonable-miaislying?
+[^2]: https://www.tumblr.com/world-heritage-posts/641432718469677056/miaislying-personsonable-miaislying
+

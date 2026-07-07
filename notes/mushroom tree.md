@@ -6,6 +6,10 @@ date-last-modified:
 ---
 ![[mushroom-tree.jpg|Two large shelf fungi at the base of a tree.]]
 
+> [!caption]
+> 
+
+
 Happened across these striking mushrooms erupting from a dying tree on a morning walk back in May. I believe they're *Cerioporus squamosus*, common name "dryad's saddle" or "pheasant back". 
 
 Absolutely obsessed with the range of colors, from the palest off-white cream to those deep red-brown scaly edges. I actually pulled several colors directly from this photo for my website palette. 
