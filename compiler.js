@@ -9,7 +9,7 @@ import { slugify } from './utils.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const template = fs.readFileSync('index.html', 'utf-8')
+const template = fs.readFileSync('template.html', 'utf-8')
 const index = JSON.parse(fs.readFileSync('index.json', 'utf-8'))
 
 for (const [slug, metadata] of Object.entries(index)) {
@@ -62,7 +62,7 @@ for (const [slug, metadata] of Object.entries(index)) {
         })
 
     const page = template
-        .replace(`{{title}}`, metadata.title)
+        .replace(`{{title}}`, `${metadata.title} | `)
         .replace(`{{body}}`, marked(body))
 
     const dir = path.join(__dirname, 'build', slug)
@@ -70,4 +70,10 @@ for (const [slug, metadata] of Object.entries(index)) {
     fs.writeFileSync(path.join(dir, 'index.html'), page)
 }
 
+const shell = template
+    .replace('{{title}}', '')
+    .replace('<article class="pane">{{body}}</article><!-- KEEP ON SINGLE LINE FOR COMPILER -->', '')
+
+fs.writeFileSync('index.html', shell)
+fs.writeFileSync('404.html', shell)
 

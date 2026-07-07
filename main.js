@@ -15,7 +15,7 @@ const PANE_WIDTH = parseInt(
 
 // takes a note slug, fetches content, creates a new pane
 async function renderPane(slug) {
-    const response = await fetch(`/build/${slug}`)
+    const response = await fetch(`/build/${slug}/`)
     const raw = await response.text()
 
     const parser = new DOMParser()
@@ -59,7 +59,7 @@ main.addEventListener('click', (event) => {
     const link = event.target.closest('a')
     if (!link) return
     
-    const href = link.getAttribute('href').slice(2)
+    const href = link.getAttribute('href').slice(1)
     if (!href || href.startsWith('http')) return
     
     event.preventDefault()
