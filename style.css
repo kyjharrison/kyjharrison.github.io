@@ -38,6 +38,7 @@
     --accent-wood: rgb(var(--wood-1));
 
     --pane-width: 600px;
+    --spine-width: 40px;
 }
 
 * {
@@ -127,7 +128,7 @@ main {
     flex: 1;
     height: 0;
     align-items: stretch;
-    justify-content: center;
+    justify-content: safe center;
 }
 
 .pane {
@@ -139,9 +140,13 @@ main {
     margin-top: 8px; /* allows shadow to cast upward "onto" header */
     min-height: calc(100% - 8px); /* subtracts shadow-margin from height so that pane doesn't overflow screen */
     padding: 32px;
-    position: sticky;
+    position: sticky; 
     left: 0;
 }
+
+.spine-0 { left: 0; }
+.spine-1 { left: calc(1 * var(--spine-width)); }
+.spine-2 { left: calc(2 * var(--spine-width)); }
 
 p {
     margin-top: 0em;
