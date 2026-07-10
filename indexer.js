@@ -9,7 +9,7 @@ import { slugify } from './utils.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const POSTS_DIR = path.join(__dirname, 'posts')
+const NOTES_DIR = path.join(__dirname, 'notes')
 const OUTPUT = path.join(__dirname, 'index.json')
 
 const LINK = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g
@@ -34,21 +34,21 @@ function listPhotos(body) {
     return photos
 }
 
-// walk through all files in POSTS_DIR
-const files = fs.readdirSync(POSTS_DIR)
+// walk through all files in NOTES_DIR
+const files = fs.readdirSync(NOTES_DIR)
 const index = {}
 
 // extract metadata from frontmatter and links
 for (const f of files) {
     const title = path.basename(f, '.md')
     const slug = slugify(title) 
-    const raw = fs.readFileSync(path.join(POSTS_DIR, f), 'utf-8')
+    const raw = fs.readFileSync(path.join(NOTES_DIR, f), 'utf-8')
     const { frontmatter, body } = splitFrontmatter(raw)
 
     index[slug] = {
         slug: slug, 
         title: title,
-        path: `posts/${f}`,
+        path: `notes/${f}`,
         type: frontmatter.type, 
         series: frontmatter.series || [], 
         published: frontmatter['date-published'] || null, 
@@ -75,4 +75,4 @@ for (const [slug, metadata] of Object.entries(index)) {
 }
 
 fs.writeFileSync(OUTPUT, JSON.stringify(index, null, 2))
-console.log(`Indexed ${files.length} posts → ${OUTPUT}`)
+console.log(`Indexed ${files.length} notes → ${OUTPUT}`)
