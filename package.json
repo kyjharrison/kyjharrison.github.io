@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "index": "node indexer.js",
-    "dev": "node indexer.js && node compiler.js && vite",
-    "build": "node indexer.js && node compiler.js && vite build"
+    "dev": "node indexer.js && node photo-scrubber.js && node indexer.js && node compiler.js && vite",
+    "build": "node indexer.js && node photo-scrubber.js && node indexer.js && node compiler.js && vite build"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "@fontsource-variable/recursive": "^5.2.8",
     "js-yaml": "^5.2.1",
     "marked": "^18.0.5",
+    "sharp": "^0.35.3",
     "vite": "^8.1.2"
   }
 }
