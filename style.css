@@ -54,7 +54,7 @@ body {
     color: var(--text);
     font-size: 16px;
     font-family: 'Recursive Variable', system-ui, sans-serif; /* also update import in main.js if changing*/
-    font-variation-settings: 'CASL' 0.5, 'MONO' 0, 'CRSV' 0, 'slnt' 0;
+    font-variation-settings: 'CASL' 0, 'MONO' 0, 'CRSV' 0, 'slnt' 0;
 
     /* 
 CASL 0 formal <-> 1 casual 
@@ -72,7 +72,11 @@ slnt 0 upright <-> -15 slant
 header {
     display: flex;
     padding: 12px 24px;
-    height: 40px;
+    /* height: 40px;  */
+
+    a {
+    text-decoration: none;
+    }
 
     a:hover, a:active {
     box-shadow: 0 0 6px 6px var(--bg) inset;
@@ -106,7 +110,7 @@ header {
     flex: 1;
     text-align: center;
     /* font-weight: 350; */
-    /* font-variation-settings: 'CASL' 0, 'MONO' 0, 'CRSV' 0, 'slnt' 0; */
+    font-variation-settings: 'CASL' 1, 'MONO' 0, 'CRSV' 0, 'slnt' 0; 
 }
 
 nav {
@@ -163,7 +167,7 @@ ul ul {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
     color: var(--link);
 }
 
@@ -173,11 +177,10 @@ a:visited {
 
 a:hover, a:active {
     color: var(--link);
-    text-decoration: none;
     background-color: var(--highlight);
     box-shadow: 0 0 6px 6px var(--pane) inset;
     border-radius: 3px;
-    padding: 2px 2px;
+    padding: 0 2px;
 }
     
 
@@ -192,7 +195,7 @@ a:hover, a:active {
     h1 {
       font-size: 32px;
       font-weight: 600;
-      font-variation-settings: 'CASL' 1, 'MONO' 0, 'CRSV' 1, 'slnt' 0;
+      font-variation-settings: 'CASL' 0.5, 'MONO' 0, 'CRSV' 0, 'slnt' 0;
       margin-top: 0px;
       margin-bottom: 16px;
       color: inherit;
@@ -244,7 +247,7 @@ a:hover, a:active {
 
     img {
       max-width: 100%;
-      max-height: 500px;
+      /* max-height: 500px; */
       object-fit: contain;
       display: block;
       margin-left: auto;
