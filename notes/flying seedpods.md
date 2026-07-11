@@ -6,5 +6,3 @@ date-last-modified:
 date-taken: 2026-04-09
 ---
 ![[flying-seedpods.jpg|Dried milkweed seedpods against a blue sky.]]
-
-[[seedpods 2]]
