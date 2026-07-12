@@ -6,9 +6,8 @@ import { dirname } from 'path'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-const css = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf-8')
-const paneMatch = css.match(/--pane-width:\s*(\d+)/)
-const PANE_WIDTH = parseInt(paneMatch[1])
+
+const IMAGE_WIDTH = 1200 // intended as 2x var(--pane-width)
 const index = JSON.parse(fs.readFileSync('index.json', 'utf-8'))
 
 for (const [slug, metadata] of Object.entries(index)) {
@@ -26,7 +25,7 @@ for (const [slug, metadata] of Object.entries(index)) {
 
     // resize, rename, and strip exifs
     await sharp(path.join(__dirname, 'images', filename))
-        .resize(PANE_WIDTH*2)
+        .resize(IMAGE_WIDTH)
         .keepIccProfile()
         .jpeg({ quality: 80 })
         .toFile(path.join(__dirname, 'images', `${slug}.jpg`))
