@@ -30,22 +30,27 @@ function updateTitle() {
 // takes a note slug, fetches file, drops pane into map
 async function appendPane(slug) {
     if (openPanes.has(slug)) {
-        // may need to replace with a custom scrollToPane(pane) function
-        openPanes.get(slug).scrollIntoView({ behavior: 'smooth', inline: 'nearest'}) 
+        const existing = openPanes.get(slug)
+        if (existing) existing.scrollIntoView({ behavior: 'smooth', inline: 'center'}) 
         return
     }
-    const response = await fetch(`/build/${slug}/`)
-    const raw = await response.text()
-    const parser = new DOMParser()
-    const page = parser.parseFromString(raw, 'text/html')
-    const pane = page.querySelector('article')
-    pane.dataset.ordinal = openPanes.size
-    pane.dataset.naturalLeft = openPanes.size * PANE_WIDTH
-    main.appendChild(pane)
-    openPanes.set(slug, pane)
-    updateURL()
-    updateTitle()
-    pane.scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
+    openPanes.set(slug, null) // reserve slot to avoid duplicate panes 
+    try {
+        const response = await fetch(`/build/${slug}/`)
+        const raw = await response.text()
+        const parser = new DOMParser()
+        const page = parser.parseFromString(raw, 'text/html')
+        const pane = page.querySelector('article')
+        pane.dataset.ordinal = openPanes.size
+        pane.dataset.naturalLeft = openPanes.size * PANE_WIDTH
+        main.appendChild(pane)
+        openPanes.set(slug, pane)
+        updateURL()
+        updateTitle()
+        pane.scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
+    } catch (err) {
+        openPanes.delete(slug) // delete reservation if misfire
+    } 
 }
 
 function removePane(slug) {
