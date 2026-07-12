@@ -43,6 +43,8 @@ async function appendPane(slug) {
         const page = parser.parseFromString(raw, 'text/html')
         const pane = page.querySelector('article')
         pane.dataset.ordinal = openPanes.size - 1 // offset for reservation
+        const spineClass = Math.min(pane.dataset.ordinal, 3)
+        pane.classList.add(`spine-${spineClass}`)
         main.appendChild(pane)
         openPanes.set(slug, pane)
         updateURL()
@@ -92,7 +94,18 @@ window.addEventListener('popstate', loadFromURL)
 main.addEventListener('scroll', () => {
     const scrollLeft = main.scrollLeft
 
-    // floor of (scrollLeft / var(--PANE-WIDTH)) = 
+    for (const [slug, pane] of openPanes) {
+        if(!pane) continue // to skip null reservations
+        const ordinal = pane.dataset.ordinal
+        const paneWidth = pane.offsetWidth
+
+        const overlapping = scrollLeft > (ordinal - 1) * paneWidth
+        pane.classList.toggle('overlappingLeft', overlapping)
+
+        const stickyLeft = parseFloat(getComputedStyle(pane).left)
+        const stuck = scrollLeft >= ordinal * paneWidth - stickyLeft
+        pane.classList.toggle('stuckLeft', stuck)        
+    }
 })
 
 loadFromURL()

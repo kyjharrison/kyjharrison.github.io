@@ -38,7 +38,8 @@
     --accent-wood: rgb(var(--wood-1));
 
     --pane-width: min(600px, 100vw);    
-    --spine-width: 40px;
+    --pane-padding: 32px;
+    --spine-width: 16px;
 }
 
 * {
@@ -137,10 +138,9 @@ main {
     overflow-y: auto;
     background-color: var(--pane);
     /* box-shadow: 0px 0px 8px var(--shadow); */
-    /* allows shadow to cast upward "onto" header */
-    /* margin-top: 8px;  */
-    min-height: calc(100% - 8px); /* subtracts shadow-margin from height so that pane doesn't overflow screen */
-    padding: 32px;
+    /* margin-top: 8px;  */ /* allows shadow to cast upward "onto" header */
+    /* min-height: calc(100% - 8px); */ /* subtracts shadow-margin from height so that pane doesn't overflow screen */
+    padding: var(--pane-padding);
     position: sticky; 
     left: 0;
     scrollbar-width: none;
@@ -149,27 +149,39 @@ main {
 .spine-0 { left: 0; }
 .spine-1 { left: calc(1 * var(--spine-width)); }
 .spine-2 { left: calc(2 * var(--spine-width)); }
+.spine-3 { 
+    left: calc(2 * var(--spine-width)); 
+} 
+
+.overlappingLeft {
+    box-shadow: -4px 0 8px var(--shadow); /* box-shadow: -8px 0 8px -4px var(--shadow);*/ /*maybe??*/ 
+}
+
+.spine-3.stuckLeft {
+    box-shadow: none;
+}
 
 p {
     margin-top: 0em;
     margin-bottom: 1em;
 }
 
-ul {
+ul, ol {
     margin-top: 0em;
     margin-bottom: 0em;
+    list-style-position: inside;
 }
 
-ul li {
+li {
     margin-bottom: 0.5em;
 }
 
-ul li > p {
+li > p {
     margin-top: 0;
     margin-bottom: 0;
 }
 
-ul ul {
+:is(ul, ol) :is(ul, ol) {
     margin-top: 0.5em;
 }
 
@@ -226,6 +238,7 @@ a:hover, a:active {
       margin-bottom: 0.5em;
     }
 
+/* 
     h2::after {
     content: "";
     display: block;
@@ -233,7 +246,8 @@ a:hover, a:active {
     height: 2px;
     background: var(--daisy-gold);
     margin-top: 0.5rem;
-}   
+}  
+*/
 
 
     hr {
@@ -254,7 +268,6 @@ a:hover, a:active {
 
     img {
       max-width: 100%;
-      /* max-height: 500px; */
       object-fit: contain;
       display: block;
       margin-left: auto;
