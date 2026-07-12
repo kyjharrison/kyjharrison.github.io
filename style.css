@@ -146,20 +146,33 @@ main {
     scrollbar-width: none;
 }
 
-.spine-0 { left: 0; }
-.spine-1 { left: calc(1 * var(--spine-width)); }
-.spine-2 { left: calc(2 * var(--spine-width)); }
-.spine-3 { 
+.spine-left-0 { left: 0; }
+.spine-left-1 { left: calc(1 * var(--spine-width)); }
+.spine-left-2 { left: calc(2 * var(--spine-width)); }
+.spine-left-3 { 
     left: calc(2 * var(--spine-width)); 
 } 
 
+.spine-right-0 { right: 0; }
+.spine-right-1 { right: calc(1 * var(--spine-width)); }
+.spine-right-2 { right: calc(2 * var(--spine-width)); }
+.spine-right-3 { 
+    right: calc(2 * var(--spine-width)); 
+} 
+
 .overlappingLeft {
-    box-shadow: -4px 0 8px var(--shadow); /* box-shadow: -8px 0 8px -4px var(--shadow);*/ /*maybe??*/ 
+    box-shadow: -8px 0 8px -8px var(--shadow);
 }
 
-.spine-3.stuckLeft {
+.overlappingRight { 
+    box-shadow: 8px 0 8px -8px var(--shadow); 
+}
+
+.spine-left-3.stuckLeft, .spine-right-3.stuckRight {
     box-shadow: none;
 }
+
+
 
 p {
     margin-top: 0em;

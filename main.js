@@ -25,6 +25,18 @@ function updateTitle() {
         : 'Ky Harrison'
 }
 
+function updateRightOrdinals() {
+    const totalPanes = openPanes.size
+    for (const [slug, pane] of openPanes) {
+        if (!pane) continue 
+        pane.classList.remove('spine-right-0', 'spine-right-1', 'spine-right-2', 'spine-right-3') 
+        const ordinalRight = totalPanes - pane.dataset.ordinal - 1 // offset to zero-index like the main ordinals
+        pane.dataset.ordinalRight = ordinalRight
+        const spineRightClass = Math.min(ordinalRight, 3)
+        pane.classList.add(`spine-right-${spineRightClass}`)
+    }
+}
+
 // takes a note slug, fetches file, drops pane into map
 async function appendPane(slug) {
     if (openPanes.has(slug)) {
@@ -42,14 +54,16 @@ async function appendPane(slug) {
         const parser = new DOMParser()
         const page = parser.parseFromString(raw, 'text/html')
         const pane = page.querySelector('article')
-        pane.dataset.ordinal = openPanes.size - 1 // offset for reservation
-        const spineClass = Math.min(pane.dataset.ordinal, 3)
-        pane.classList.add(`spine-${spineClass}`)
+        const ordinal = openPanes.size - 1 // offset for reservation
+        pane.dataset.ordinal = ordinal
+        const spineLeftClass = Math.min(ordinal, 3)
+        pane.classList.add(`spine-left-${spineLeftClass}`)
         main.appendChild(pane)
         openPanes.set(slug, pane)
         updateURL()
         updateTitle()
         pane.scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
+        updateRightOrdinals()
     } catch (err) {
         openPanes.delete(slug) // delete reservation if misfire
     } 
@@ -61,6 +75,7 @@ function removePane(slug) {
     pane.remove()
     openPanes.delete(slug)
     updateURL()
+    updateRightOrdinals()
 }
 
 async function loadFromURL() {
