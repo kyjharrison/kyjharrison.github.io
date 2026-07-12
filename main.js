@@ -6,9 +6,7 @@ import { slugify } from './utils.js'
 const main = document.querySelector('main')
 const metadata = await fetch('/index.json').then(r => r.json())
 const openPanes = new Map()
-const PANE_WIDTH = parseInt(
-    getComputedStyle(document.documentElement).getPropertyValue('--pane-width')
-)
+
 const SPINE_WIDTH = parseInt(
     getComputedStyle(document.documentElement).getPropertyValue('--spine-width')
 )
@@ -31,7 +29,10 @@ function updateTitle() {
 async function appendPane(slug) {
     if (openPanes.has(slug)) {
         const existing = openPanes.get(slug)
-        if (existing) existing.scrollIntoView({ behavior: 'smooth', inline: 'center'}) 
+        if (existing) main.scrollTo({
+            left: existing.dataset.ordinal * existing.offsetWidth - (main.offsetWidth - existing.offsetWidth) / 2,
+            behavior: 'smooth'
+        }) 
         return
     }
     openPanes.set(slug, null) // reserve slot to avoid duplicate panes 
@@ -41,8 +42,7 @@ async function appendPane(slug) {
         const parser = new DOMParser()
         const page = parser.parseFromString(raw, 'text/html')
         const pane = page.querySelector('article')
-        pane.dataset.ordinal = openPanes.size
-        pane.dataset.naturalLeft = openPanes.size * PANE_WIDTH
+        pane.dataset.ordinal = openPanes.size - 1 // offset for reservation
         main.appendChild(pane)
         openPanes.set(slug, pane)
         updateURL()
