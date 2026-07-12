@@ -4,21 +4,27 @@ import { splitFrontmatter } from './utils.js'
 import { slugify } from './utils.js'
 
 const main = document.querySelector('main')
-
 const metadata = await fetch('/index.json').then(r => r.json())
-
 const openPanes = new Map()
-
 const PANE_WIDTH = parseInt(
     getComputedStyle(document.documentElement).getPropertyValue('--pane-width')
 )
+const SPINE_WIDTH = parseInt(
+    getComputedStyle(document.documentElement).getPropertyValue('--spine-width')
+)
 
 let allowUpdateURL = true 
-
 function updateURL() {
     if (!allowUpdateURL) return
     const path = '/' + [...openPanes.keys()].join('/')
     history.pushState(null, '', path)
+}
+
+function updateTitle() {
+    const latestSlug = [...openPanes.keys()].at(-1)
+    document.title = latestSlug
+        ? `${metadata[latestSlug].title} | Ky Harrison`
+        : 'Ky Harrison'
 }
 
 // takes a note slug, fetches file, drops pane into map
@@ -30,7 +36,6 @@ async function appendPane(slug) {
     }
     const response = await fetch(`/build/${slug}/`)
     const raw = await response.text()
-
     const parser = new DOMParser()
     const page = parser.parseFromString(raw, 'text/html')
     const pane = page.querySelector('article')
@@ -39,7 +44,7 @@ async function appendPane(slug) {
     main.appendChild(pane)
     openPanes.set(slug, pane)
     updateURL()
-    document.title = `${metadata[slug].title} | Ky Harrison`
+    updateTitle()
     pane.scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
 }
 
@@ -61,28 +66,28 @@ async function loadFromURL() {
     for (const slug of urlSlugs) {
         await appendPane(slug)
     }
+    updateTitle()
     allowUpdateURL = true
 }
 
-// TODO function closePane() {} 
-// when X is clicked in pane corner, drops from Map
-
-// TODO scroll listener
-
-// window.addEventListener('popstate', appendPane | removePane? or loadFromURL)
-
+// intercepts internal links and opens them as panes 
 main.addEventListener('click', (event) => {
     const link = event.target.closest('a')
     if (!link) return
-    
     const href = link.getAttribute('href').slice(1)
     if (!href || href.startsWith('http')) return
-    
     event.preventDefault()
-    
     appendPane(href)
 })
 
+// listens for forward/back buttons
 window.addEventListener('popstate', loadFromURL)
+
+// the core overlapping spine logic
+main.addEventListener('scroll', () => {
+    const scrollLeft = main.scrollLeft
+
+    // floor of (scrollLeft / var(--PANE-WIDTH)) = 
+})
 
 loadFromURL()
