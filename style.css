@@ -26,7 +26,7 @@
     --bg: rgb(var(--cream-2));
     --text: rgb(var(--dark-brown-3));
     --header: rgb(var(--cream-2));
-    --shadow: rgba(var(--dark-brown-3), 0.1);
+    --shadow: rgba(var(--dark-brown-3), 0.2);
     --link: rgb(var(--green-4));
     --link-visited: rgb(var(--green-5));
     --link-hover: rgb(var(--green-3));
@@ -129,7 +129,8 @@ main {
     flex: 1;
     height: 0;
     align-items: stretch;
-    justify-content: safe center;
+    justify-content: safe center; /* so the centering only happens until the viewport is full*/
+    isolation: isolate; /* so the z-index updating doesn't spill out of the container*/
 }
 
 .pane {
@@ -137,40 +138,31 @@ main {
     flex-shrink: 0;
     overflow-y: auto;
     background-color: var(--pane);
-    /* box-shadow: 0px 0px 8px var(--shadow); */
-    /* margin-top: 8px;  */ /* allows shadow to cast upward "onto" header */
-    /* min-height: calc(100% - 8px); */ /* subtracts shadow-margin from height so that pane doesn't overflow screen */
     padding: var(--pane-padding);
+    scrollbar-width: none;
     position: sticky; 
     left: 0;
-    scrollbar-width: none;
+    /* right: 0; */
+    --shadow-left: 0 0 0 transparent;
+    --shadow-right: 0 0 0 transparent;
+    box-shadow: var(--shadow-left), var(--shadow-right);
 }
 
 .spine-left-0 { left: 0; }
 .spine-left-1 { left: calc(1 * var(--spine-width)); }
 .spine-left-2 { left: calc(2 * var(--spine-width)); }
-.spine-left-3 { 
-    left: calc(2 * var(--spine-width)); 
-} 
+
 
 .spine-right-0 { right: 0; }
 .spine-right-1 { right: calc(1 * var(--spine-width)); }
 .spine-right-2 { right: calc(2 * var(--spine-width)); }
-.spine-right-3 { 
-    right: calc(2 * var(--spine-width)); 
-} 
 
-.overlappingLeft {
-    box-shadow: -8px 0 8px -8px var(--shadow);
-}
 
-.overlappingRight { 
-    box-shadow: 8px 0 8px -8px var(--shadow); 
-}
+.overlappingLeft  { --shadow-left:  -8px 0 8px -8px var(--shadow); }
+.overlappingRight { --shadow-right:  8px 0 8px -8px var(--shadow); }
 
-.spine-left-3.stuckLeft, .spine-right-3.stuckRight {
-    box-shadow: none;
-}
+.spine-left-2.stuckLeft   { --shadow-left:  0 0 0 transparent; }
+.spine-right-2.stuckRight { --shadow-right: 0 0 0 transparent; }
 
 
 
