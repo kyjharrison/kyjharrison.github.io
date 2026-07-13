@@ -90,12 +90,18 @@ async function appendPane(slug) {
         const page = parser.parseFromString(raw, 'text/html')
         const pane = page.querySelector('article')
         main.appendChild(pane)
+
+        pane.style.position = 'relative'
         openPanes.set(slug, pane)
         updateOrdinals() 
         updateURL()
         updateTitle()
+
+        main.addEventListener('scrollend', () => {
+            pane.style.position = ''
+        }, { once: true })
+
         main.scrollTo({left: Number(pane.dataset.ordinal) * pane.clientWidth, behavior: 'smooth' })
-//        pane.scrollIntoView({ behavior: 'smooth', inline: 'end' })
     } catch (err) {
         openPanes.delete(slug) // delete reservation if misfire
     } 
