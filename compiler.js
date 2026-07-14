@@ -49,7 +49,8 @@ for (const [slug, metadata] of Object.entries(index)) {
                 .split('\n')
                 .map(line => line.replace(/^> /, ''))
                 .filter(line => line.length > 0)
-                .join('\n')
+                .map(line => marked.parseInline(line))
+                .join('<br>')
             return `<figcaption>${caption}</figcaption></figure>`
         })
 
