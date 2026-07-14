@@ -80,12 +80,22 @@ function updateStack() {
 async function appendPane(slug) {
     if (openPanes.has(slug)) {
         const existing = openPanes.get(slug)
-        if (existing) main.scrollTo({
-            left: existing.dataset.ordinal * existing.offsetWidth - (main.offsetWidth - existing.offsetWidth) / 2,
-            behavior: 'smooth'
-        }) 
+        if (existing) {
+            if (window.innerWidth >= 650) {
+                main.scrollTo({
+                    left: existing.dataset.ordinal * existing.offsetWidth - (main.offsetWidth - existing.offsetWidth) / 2,
+                    behavior: 'smooth'
+                })
+            } else {
+                main.scrollTo({
+                    top:existing.offsetTop - document.querySelector('header').offsetHeight, // offset header height
+                    behavior: 'smooth'
+            })
+        }
         return
     }
+    }
+
     openPanes.set(slug, null) // reserve slot to avoid duplicate panes 
     try {
         const response = await fetch(`/build/${slug}/`)
@@ -104,7 +114,9 @@ async function appendPane(slug) {
         //     pane.style.position = '' // releases new pane back to sticky positioning
         // }, { once: true })
 
+        if (window.innerWidth >= 650) {
         main.scrollTo({left: Number(pane.dataset.ordinal) * pane.clientWidth, behavior: 'smooth' })
+        }
     } catch (err) {
         openPanes.delete(slug) // delete reservation if misfire
     } 
