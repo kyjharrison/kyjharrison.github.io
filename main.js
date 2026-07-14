@@ -24,9 +24,13 @@ function updateOrdinals() {
     for (const [slug, pane] of openPanes) {
         if (!pane) continue 
 
+        // spineLeftClass and spineRightClass have 3 versions:
+        // 0 is flat, the bottom layer, scrolling all the way to the edge of the viewport
+        // 1 is a single visible edge, stopping early var(--spine-width) from the edge
+        // 2 is everything else, stops at the same place as 1 but with the shadows suppressed to avoid pooling
         pane.classList.remove('spine-left-0', 'spine-left-1', 'spine-left-2', 'spine-left-3') 
         pane.dataset.ordinal = ordinal
-        const spineLeftClass = Math.min(ordinal, 2)
+        const spineLeftClass = Math.min(ordinal, 2) 
         pane.classList.add(`spine-left-${spineLeftClass}`)
         const paneLeftStop = parseFloat(getComputedStyle(pane).left)
         pane.dataset.leftStop = paneLeftStop
@@ -89,10 +93,10 @@ async function appendPane(slug) {
         const parser = new DOMParser()
         const page = parser.parseFromString(raw, 'text/html')
         const pane = page.querySelector('article')
-        main.appendChild(pane)
         pane.style.position = 'relative' // brings new pane in from offscreen
+        main.appendChild(pane)
         openPanes.set(slug, pane)
-        updateOrdinals() 
+        updateOrdinals()
         updateURL()
         updateTitle()
         main.addEventListener('scrollend', () => {
@@ -134,10 +138,10 @@ async function loadFromURL() {
 main.addEventListener('click', (event) => {
     const link = event.target.closest('a')
     if (!link) return
-    const href = link.getAttribute('href').slice(1)
+    const href = link.getAttribute('href')
     if (!href || href.startsWith('http')) return
     event.preventDefault()
-    appendPane(href)
+    appendPane(href.slice(1))
 })
 
 // listens for forward/back buttons
