@@ -93,15 +93,16 @@ async function appendPane(slug) {
         const parser = new DOMParser()
         const page = parser.parseFromString(raw, 'text/html')
         const pane = page.querySelector('article')
-        pane.style.position = 'relative' // brings new pane in from offscreen
+        //pane.style.position = 'relative' // brings new pane in from offscreen
         main.appendChild(pane)
         openPanes.set(slug, pane)
         updateOrdinals()
+        updateStack()
         updateURL()
         updateTitle()
-        main.addEventListener('scrollend', () => {
-            pane.style.position = '' // releases new pane back to sticky positioning
-        }, { once: true })
+        // main.addEventListener('scrollend', () => {
+        //     pane.style.position = '' // releases new pane back to sticky positioning
+        // }, { once: true })
 
         main.scrollTo({left: Number(pane.dataset.ordinal) * pane.clientWidth, behavior: 'smooth' })
     } catch (err) {
