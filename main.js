@@ -135,7 +135,7 @@ function removePane(slug) {
 async function loadFromURL() {
     allowUpdateURL = false // if loading from the URL, trying to push changes back would be circular 
     const urlSlugs = window.location.pathname.split('/').filter(s => s)
-    if (urlSlugs.length === 0) { urlSlugs.push('home')}
+    if (urlSlugs.length === 0) { urlSlugs.push('welcome')}
     for (const slug of [...openPanes.keys()]) {
         if (!urlSlugs.includes(slug)) { removePane(slug)}
     }
@@ -148,11 +148,11 @@ async function loadFromURL() {
 }
 
 // intercepts internal links and opens them as panes 
-main.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
     const link = event.target.closest('a')
     if (!link) return
     const href = link.getAttribute('href')
-    if (!href || href.startsWith('http')) return
+    if (!href || href.startsWith('http') || href === '/') return
     event.preventDefault()
     appendPane(href.slice(1))
 })
