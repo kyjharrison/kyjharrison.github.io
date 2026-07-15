@@ -51,7 +51,7 @@ for (const [slug, metadata] of Object.entries(index)) {
                 .filter(line => line.length > 0)
                 .map(line => marked.parseInline(line))
                 .join('<br>')
-            return `<figcaption>${caption}</figcaption></figure>`
+            return `<figcaption>${caption}</figcaption></figure>\n\n`
         })
 
     // find obsidian wikilinks and turn into standard markdown links for the markdown parser

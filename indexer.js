@@ -13,7 +13,7 @@ const NOTES_DIR = path.join(__dirname, 'notes')
 const OUTPUT = path.join(__dirname, 'index.json')
 
 const LINK = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g
-const PHOTO = /!\[\[([^\]]+)\]\]/g
+const PHOTO = /!\[\[([^\]|]+)/g
 
 function listLinks(body) {
     const links = []
@@ -28,8 +28,7 @@ function listPhotos(body) {
     const photos = []
     let p
     while ((p = PHOTO.exec(body)) !== null) {
-        const name = p[1].replace(/\.[^.]+$/, '')
-        photos.push(name)
+        photos.push(p[1])
     }
     return photos
 }
