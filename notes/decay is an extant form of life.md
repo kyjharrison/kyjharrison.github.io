@@ -2,7 +2,8 @@
 type: post
 series:
 date-published: 2026-07-05T17:32:00
-date-last-modified:
+date-modified: 2026-07-13T23:27:55
+date-created: 2026-07-05T21:55:04
 ---
 Tumblr poetry goes so hard sometimes. Back in 2018 @personsonable[^1] wrote *you cannot kill me in a way that matters* and *decay exists as an extant form of life*.[^2]
 

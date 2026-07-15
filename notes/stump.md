@@ -2,7 +2,8 @@
 type: photo
 series:
 date-published: 2026-07-05T18:00:00
-date-last-modified:
+date-modified: 2026-07-13T23:27:38
+date-created: 2026-07-05T21:55:04
 ---
 ![[stump.jpg|Bright green ferns spilling out of a hollow stump.]]
 
