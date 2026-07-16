@@ -2,11 +2,17 @@
 type: photo
 series:
 date-published:
-date-modified: Monday, July 13th 2026, 9:54:41 pm
+date-modified: 2026-07-15T19:49:47
 date-taken: 2026-05-24
-date-created: Thursday, July 9th 2026, 9:06:08 pm
+date-created: 2026-07-09T21:06:08
+date-last-modified:
+source: PXL_20260524_111928219
+paths:
+  - "[[gleam|more still water]]"
+  - "[[fallen log|a different landscape]]"
 ---
 
 ![[mirror.jpg|Wooded shoreline reflected in a still lake at sunrise]]
 
-[[fallen log]]
+^ Sunrise over Lower Pauness 
+^ Boundary Waters Canoe Area Wilderness
