@@ -268,6 +268,14 @@ a:hover, a:active {
     padding: 0 2px;
 }
 
+a[aria-current="page"] {
+    color: var(--link);
+    background-color: var(--highlight);
+    box-shadow: 0 0 6px 6px var(--pane) inset;
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
 a[href^="http"]::after {
 content: " ↗";
 }

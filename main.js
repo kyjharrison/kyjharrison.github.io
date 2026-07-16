@@ -76,6 +76,15 @@ function updateStack() {
     }
 }
 
+function updateLinkStates() {
+    document.querySelectorAll('a[aria-current]')
+        .forEach(a => a.removeAttribute('aria-current'))
+    for (const slug of openPanes.keys()) {
+        document.querySelectorAll(`a[href="/${slug}"]`)
+            .forEach(a => a.setAttribute('aria-current', 'page'))
+    }
+}
+
 // takes a note slug, fetches file, drops pane into map
 async function appendPane(slug) {
     if (openPanes.has(slug)) {
@@ -113,7 +122,7 @@ async function appendPane(slug) {
         // main.addEventListener('scrollend', () => {
         //     pane.style.position = '' // releases new pane back to sticky positioning
         // }, { once: true })
-
+        updateLinkStates()
         if (window.innerWidth >= 650) {
         main.scrollTo({left: Number(pane.dataset.ordinal) * pane.clientWidth, behavior: 'smooth' })
         }
@@ -130,6 +139,7 @@ function removePane(slug) {
     updateURL()
     updateOrdinals()
     updateStack()
+    updateLinkStates()
 }
 
 async function loadFromURL() {
