@@ -69,9 +69,9 @@ for (const [slug, metadata] of Object.entries(index)) {
     body = marked(body)
 
     const footerLinks = metadata.paths 
-        .map(l => marked.parseInline(convertWikilinks(l)))
-        .join(' · ')
-    const footer = `<footer class="note-footer">${footerLinks}</footer>`
+        .map(l => `<li>${marked.parseInline(convertWikilinks(l))}</li>`)
+        .join('')
+    const footer = `<footer class="note-footer"><ul>${footerLinks}</ul></footer>`
 
     const pane = `<article class="pane">${body}${footer}</article>`
 

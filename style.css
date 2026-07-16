@@ -199,6 +199,15 @@ figcaption {
     margin: 0.5rem auto 0;
 } 
 
+.note-footer {
+    text-align: center;
+}
+
+.note-footer ul {
+    margin-top: 1rem;
+    list-style: none;
+}
+
 .photo-grid {
     display: flex;
     flex-wrap: wrap;
@@ -243,7 +252,7 @@ li > p {
 }
 
 a {
-    text-decoration: underline;
+    text-decoration: none;
     color: var(--link);
 }
 
