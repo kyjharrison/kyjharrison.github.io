@@ -13,7 +13,7 @@ function updateURL() {
 
 function updateTitle() {
     const latestSlug = [...openPanes.keys()].at(-1)
-    document.title = latestSlug
+    document.title = metadata[latestSlug]?.title
         ? `${metadata[latestSlug].title} | Ky Harrison`
         : 'Ky Harrison'
 }
@@ -99,10 +99,10 @@ async function appendPane(slug) {
                 main.scrollTo({
                     top:existing.offsetTop - document.querySelector('header').offsetHeight, // offset header height
                     behavior: 'smooth'
-            })
+                })
+            }
         }
         return
-    }
     }
 
     openPanes.set(slug, null) // reserve slot to avoid duplicate panes 
@@ -127,6 +127,7 @@ async function appendPane(slug) {
         main.scrollTo({left: Number(pane.dataset.ordinal) * pane.clientWidth, behavior: 'smooth' })
         }
     } catch (err) {
+        console.error(err)
         openPanes.delete(slug) // delete reservation if misfire
     } 
 }

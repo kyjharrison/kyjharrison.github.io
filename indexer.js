@@ -74,5 +74,13 @@ for (const [slug, metadata] of Object.entries(index)) {
     }
 }
 
+index['welcome'] = {
+    slug: 'welcome',
+    title: 'welcome',
+    path: null,
+    type: 'page',
+    published: null,
+}
+
 fs.writeFileSync(OUTPUT, JSON.stringify(index, null, 2))
 console.log(`Indexed ${files.length} notes → ${OUTPUT}`)

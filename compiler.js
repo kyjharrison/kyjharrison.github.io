@@ -22,7 +22,8 @@ function convertWikilinks(text){
 }
 
 for (const [slug, metadata] of Object.entries(index)) {
-
+    if (!metadata.path) continue 
+    
     const title = metadata.title
     // read note into memory and discard frontmatter
     const raw = fs.readFileSync(path.join(__dirname, metadata.path), 'utf-8')
