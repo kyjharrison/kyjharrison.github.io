@@ -62,7 +62,8 @@ body {
     height: 100vh;
     background-color: var(--bg);
     color: var(--text);
-    font-size: 18px;
+    line-height: 1.5;
+    font-size: 20px;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -188,15 +189,15 @@ figcaption {
     font-size: 14px;
 }
 
-/* figure::after {
+.note-footer::before {
     content: "";
     display: block;
     width: 48px;
     height: 2px;
     background: var(--accent-wood) ;
     margin-top: 0.5rem;
-    text-align: center;
-} */
+    margin: 0.5rem auto 0;
+} 
 
 .photo-grid {
     display: flex;
