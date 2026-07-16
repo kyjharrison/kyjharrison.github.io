@@ -115,16 +115,16 @@ header {
 
 .tagline {
     flex: 1;
-    text-align: center;
+    text-align: end;
     --casl: 1;
 }
 
-nav {
+/* nav {
     flex: 1;
     display: flex;
     justify-content: flex-end;
     gap: 16px;
-}
+} */
 
 
 main {
