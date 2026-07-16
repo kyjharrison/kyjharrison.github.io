@@ -55,7 +55,8 @@ for (const f of files) {
         links: listLinks(body),
         backlinks: [],
         photos: listPhotos(body), 
-        photo_embedded_in: []
+        photo_embedded_in: [],
+        paths: frontmatter.paths || []
     }
 }
 
