@@ -12,14 +12,24 @@ const __dirname = dirname(__filename)
 const template = fs.readFileSync('template.html', 'utf-8')
 const index = JSON.parse(fs.readFileSync('index.json', 'utf-8'))
 
+const WIKILINK = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g // finds [[link|alias]]
+
+function convertWikilinks(text){ 
+    return text.replace(WIKILINK, (match, link, alias) => {
+        const slug = slugify(link)
+        return `[${alias || link }](/${slug})`
+    })
+}
+
 for (const [slug, metadata] of Object.entries(index)) {
 
+    const title = metadata.title
     // read note into memory and discard frontmatter
     const raw = fs.readFileSync(path.join(__dirname, metadata.path), 'utf-8')
     let { body } = splitFrontmatter(raw)
 
     // insert filename title as h1
-    body = `# ${metadata.title}\n\n${body}`
+    body = `# ${title}\n\n${body}`
 
     // look for obsidian image embeds like ![[image.jpg|alt text]]
     // convert to html image embeds with alt text
@@ -55,16 +65,19 @@ for (const [slug, metadata] of Object.entries(index)) {
         })
 
     // find obsidian wikilinks and turn into standard markdown links for the markdown parser
-    body = body.replace(
-        /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, // finds [[link|alias]]
-        (match, link, alias) => {
-            const slug = slugify(link)
-            return `[${alias || link }](/${slug})`
-        })
+    body = convertWikilinks(body)
+    body = marked(body)
+
+    const footerLinks = metadata.paths 
+        .map(l => marked.parseInline(convertWikilinks(l)))
+        .join(' · ')
+    const footer = `<footer class="note-footer">${footerLinks}</footer>`
+
+    const pane = `<article class="pane">${body}${footer}</article>`
 
     const page = template
-        .replace(`{{title}}`, `${metadata.title} | `)
-        .replace(`{{body}}`, marked(body))
+        .replace(`<!--{title}-->`, `${title} | `)
+        .replace(`<!--{pane}-->`, pane)
 
     const dir = path.join(__dirname, 'build', slug)
     fs.mkdirSync(dir, { recursive: true })
@@ -72,8 +85,8 @@ for (const [slug, metadata] of Object.entries(index)) {
 }
 
 const shell = template
-    .replace('{{title}}', '')
-    .replace('<article class="pane">{{body}}</article><!-- KEEP ON SINGLE LINE FOR COMPILER -->', '')
+    .replace('<!--{title}-->', '')
+    .replace('<!--{pane}-->', '')
 
 fs.writeFileSync('index.html', shell)
 fs.writeFileSync('404.html', shell)
