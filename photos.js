@@ -24,8 +24,8 @@ for (const metadata of photos) {
 const body = `<h1>photos</h1><div class="photo-grid">${grid}</div>`
 const page = template
     .replace(`<!--{title}-->`, `Photos | `)
-    .replace(`<!--{body}-->`, body)
-    
+    .replace(`<!--{pane}-->`, `<article class="pane">${body}<footer class="note-footer"></footer></article>`)
+
 const dir = path.join(__dirname, 'build', 'photos')
 fs.mkdirSync(dir, { recursive: true })
 fs.writeFileSync(path.join(dir, 'index.html'), page)
