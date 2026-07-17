@@ -52,13 +52,13 @@ for (const [slug, metadata] of Object.entries(index)) {
         })
 
     // look for the closing </figure> tag left by the previous step 
-    // if followed by a `> [!caption]` blockquote, insert that as the <figcaption>
+    // if followed by one or more `^` caption lines, insert those as the <figcaption>
     body = body.replace(
-        /<\/figure>\n+> \[!caption\]\n((?:> [^\n]*\n?)*)/gm,
+        /<\/figure>\n+((?:\^ ?[^\n]*\n?)+)/gm,
         (match, captionLines) => {
             const caption = captionLines
                 .split('\n')
-                .map(line => line.replace(/^> /, ''))
+                .map(line => line.replace(/^\^ ?/, ''))
                 .filter(line => line.length > 0)
                 .map(line => marked.parseInline(line))
                 .join('<br>')
