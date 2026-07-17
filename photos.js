@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
+import { filterNotes } from './utils.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -9,13 +10,8 @@ const __dirname = dirname(__filename)
 const template = fs.readFileSync('template.html', 'utf-8')
 const index = JSON.parse(fs.readFileSync('index.json', 'utf-8'))
 
-const photos = Object.values(index)
-    .filter(m => m.type === 'photo')
-    .sort((a,b) => {
-        const dateA = new Date(a.published || 0)
-        const dateB = new Date(b.published || 0)
-        return dateB - dateA // reverse chronological
-    })
+const photos = filterNotes(index, 'photo')
+
 let grid = ''
 for (const metadata of photos) {
     const filename = metadata.photos[0]
