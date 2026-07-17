@@ -6,7 +6,7 @@
   "scripts": {
     "index": "node indexer.js",
     "dev": "node indexer.js && node photo-scrubber.js && node indexer.js && node compiler.js && node photos.js && node welcome.js && vite",
-    "build": "node indexer.js && node photo-scrubber.js && node indexer.js && node compiler.js && node photos.js && node welcome.js && vite build"
+    "build": "node indexer.js && node photo-scrubber.js && node indexer.js && node compiler.js && node photos.js && node welcome.js && vite build && cp -r build dist/build && cp index.json dist/ && cp -r images dist/images && cp 404.html dist/ && cp .nojekyll dist/"
   },
   "keywords": [],
   "author": "",
