@@ -11,4 +11,4 @@ paths:
   - "[[deer|eye contact]]"
   - "[[stump|greenery]]"
 ---
-![[raccoon.jpg|]]
+![[raccoon.jpg]]
