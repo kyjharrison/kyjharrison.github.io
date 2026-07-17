@@ -146,7 +146,10 @@ function removePane(slug) {
 async function loadFromURL() {
     allowUpdateURL = false // if loading from the URL, trying to push changes back would be circular 
     const urlSlugs = window.location.pathname.split('/').filter(s => s)
-    if (urlSlugs.length === 0) { urlSlugs.push('welcome')}
+    if (urlSlugs.length === 0) { 
+        urlSlugs.push('welcome')
+        history.replaceState(null, '', '/welcome')
+    }
     for (const slug of [...openPanes.keys()]) {
         if (!urlSlugs.includes(slug)) { removePane(slug)}
     }
