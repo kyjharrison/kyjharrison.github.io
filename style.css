@@ -63,7 +63,7 @@ body {
     background-color: var(--bg);
     color: var(--text);
     line-height: 1.5;
-    font-size: 20px;
+    font-size: 18px;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -200,6 +200,7 @@ figcaption {
 } 
 
 .note-footer {
+    margin-top: 2rem;
     text-align: center;
 }
 
@@ -211,12 +212,12 @@ figcaption {
 .photo-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    justify-content: space-between;
 }
 
 .thumbnail {
-    width: 160px;
-    height: 160px;
+    width: 170px;
+    height: 170px;
     overflow: hidden;
 }
 
@@ -293,20 +294,21 @@ h1 {
 h2 {
     font-size: 24px;
     line-height: 26px;
-    letter-spacing: 0.014%;
-    font-weight: normal;
+    letter-spacing: 1%;
+    --wght: 350;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
+    text-transform: uppercase;
 }
 
-h2::after {
+/* h2::after {
     content: "";
     display: block;
     width: 24px;
     height: 2px;
     background: var(--accent-wood);
     margin-top: 0.5rem;
-}  
+}   */
 
 hr {
     margin-top: 2em;
