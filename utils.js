@@ -12,3 +12,14 @@ export function splitFrontmatter(text) {
 export function slugify(title) {
     return title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
 }
+
+export function filterNotes(index, noteType) {
+    const notes = Object.values(index)
+    .filter(m => m.type === noteType)
+    .sort((a,b) => {
+        const dateA = new Date(a.published || 0)
+        const dateB = new Date(b.published || 0)
+        return dateB - dateA // reverse chronological
+    })
+    return notes
+}
